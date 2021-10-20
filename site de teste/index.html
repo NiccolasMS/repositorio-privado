@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="sweetalert.js"></script>
+    <title>Login</title>
+</head>
+
+<body>
+
+    <audio id="som">
+        // Coloca um .ogg e um .mp3, porque assim, todos os navegadores irão aceitar!
+                <source src="sound/efeito-sonoro-pop.ogg"/>
+                <source src="sound/efeito-sonoro-pop.mp3"/>
+            </audio>
+
+    <div class="container">
+        <div class="divLogin">
+            <img src="img/Logo Aqualife 4 PNG.png">
+            <div>
+                <span>Usuário:</span>
+                <input id="ipt_usuario" type="text" placeholder="Entre com seu usuário">
+            </div>
+            <div>
+                <span>Senha:</span>
+                <input id="ipt_senha" type="password" placeholder="Entre com sua senha">
+            </div>
+            <div>
+                <button onclick="entrar()">Entrar</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>Aqualife Sensors © 2021</p>
+    </div>
+</body>
+
+</html>
+<script>
+    function alertaSuccess(type, title, mensagem) {
+        Swal.fire({
+            icon: 'success',
+            type: type,
+            title: title,
+            text: mensagem,
+            showConfirmButton: false,
+            timer: 1500
+        });
+
+    }
+    function alertaError(type, title, mensagem) {
+        Swal.fire({
+            icon: 'error',
+            type: type,
+            title: title,
+            text: mensagem,
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
+    function toastSuc(title) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: title
+        })
+
+    }
+    function toastError(title) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'error',
+            title: title
+        })
+
+    }
+
+
+    function entrar() {
+        if (ipt_usuario.value == 'Admin' && ipt_senha.value == 'admin') {
+            document.getElementById('som').play();
+            // alertSuccess("success", "Entrou!", `Seja bem-vindo, ${ipt_usuario.value}!`);
+            toastSuc(`Logado com sucesso, ${ipt_usuario.value}!`)
+        } else {
+            document.getElementById('som').play();
+            // alertaError("error", "Tente novamente!", "Usuário ou senha inválidos!");
+            toastError(`Usuário ou senha inválidos!`)
+        }
+    }
+</script>
